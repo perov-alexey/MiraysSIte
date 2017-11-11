@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Miray's Commissions!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="scripts/commission-page-module.js"></script>
 </head>
-<body>
-    Hello!
+<body ng-app="commissionPage">
+    <span>Hello!</span>
+    <div ng-controller="commissionPageController" class="container-fluid view">
+        <div class="col-lg-6 commissions">
+            <div ng-repeat="index in getNumberRange(commissionsNumber) track by $index" class="row commission">
+                <div class="col-lg-1 status_container">
+                    <div class="status"></div>
+                </div>
+                <div class="col-lg-11 commission_owner">Alyosha {{$index + 1}}</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
