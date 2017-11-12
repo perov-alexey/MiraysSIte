@@ -2,8 +2,15 @@
     width: 20px;
     height: 20px;
     border-radius: 10px;
-    background-color: green;
     border: solid black thin;
+}
+
+.open_commission {
+    background-color: green;
+}
+
+.close_commission {
+    background-color: red;
 }
 
 .status_container {

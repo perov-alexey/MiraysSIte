@@ -17,11 +17,11 @@
     <span>Hello!</span>
     <div ng-controller="commissionPageController" class="container-fluid view">
         <div class="col-lg-6 commissions">
-            <div ng-repeat="index in getNumberRange(commissionsNumber) track by $index" class="row commission">
+            <div ng-repeat="commission in commissions" class="row commission">
                 <div class="col-lg-1 status_container">
-                    <div class="status"></div>
+                    <div ng-class="commission.owner ? 'close_commission' : 'open_commission'" class="status"></div>
                 </div>
-                <div class="col-lg-11 commission_owner">Alyosha {{$index + 1}}</div>
+                <div class="col-lg-11 commission_owner">{{commission.owner}}</div>
             </div>
         </div>
     </div>
