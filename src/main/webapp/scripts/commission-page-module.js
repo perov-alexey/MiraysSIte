@@ -1,6 +1,9 @@
 (function(angular) {
     'use strict';
-    angular.module('commissionPage', ['ngRoute']).controller('commissionPageController', function($scope, $http) {
+    angular.module('commissionPage', ['ngRoute'])
+        .run(function($http) {
+            $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        }).controller('commissionPageController', function($scope, $http) {
 
         $scope.slotsAmount = 5;
 
