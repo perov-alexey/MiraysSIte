@@ -28,13 +28,16 @@ public class SiteApplication {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
+            //TODO Enable CSRF
             http.httpBasic()
             .and()
             .authorizeRequests()
-            .antMatchers("/", "/login", "/scripts/**", "/commissions/**").permitAll()
+            .antMatchers("/", "/login", "/login.html", "/logout", "/scripts/**", "/commission/all", "/user").permitAll()
             .anyRequest().authenticated()
             .and()
-            .formLogin();
+            .formLogin()
+            .and()
+            .csrf().disable();
         }
 
         @Autowired
