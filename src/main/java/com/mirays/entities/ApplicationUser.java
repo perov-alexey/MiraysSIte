@@ -12,10 +12,12 @@ public class ApplicationUser {
     }
 
     public ApplicationUser(ApplicationUser applicationUser) {
-        this.id = applicationUser.id;
-        this.username = applicationUser.username;
-        this.password = applicationUser.password;
-        this.email = applicationUser.email;
+        if (applicationUser != null) {
+            this.id = applicationUser.id;
+            this.username = applicationUser.username;
+            this.password = applicationUser.password;
+            this.email = applicationUser.email;
+        }
     }
 
     @Id

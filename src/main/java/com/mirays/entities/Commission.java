@@ -1,9 +1,6 @@
 package com.mirays.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Commission {
@@ -14,6 +11,18 @@ public class Commission {
 
     //TODO In future use User here
     private String owner;
+
+    @Enumerated
+    @Column(nullable = false)
+    private Stage stage;
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     public Integer getId() {
         return id;

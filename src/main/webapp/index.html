@@ -18,10 +18,11 @@
         <div class="col-lg-6 commissions">
             <div ng-repeat="commission in commissions" class="row commission">
                 <div class="col-lg-1 status_container">
-                    <div ng-class="commission.owner ? 'close_commission' : 'open_commission'" class="status"></div>
+                    <div ng-class="commission.stage ? 'close_commission' : 'open_commission'" class="status"></div>
                 </div>
-                <div ng-hide="isAuthorized" class="col-lg-11 commission_owner">{{commission.owner}}</div>
-                <div ng-show="isAuthorized" class="col-lg-10 commission_owner"><input ng-model="commission.owner"></div>
+                <div ng-hide="isAuthorized" class="col-lg-8 commission_owner">{{commission.owner}}</div>
+                <div ng-show="isAuthorized" class="col-lg-7 commission_owner"><input ng-model="commission.owner"></div>
+                <div class="col-lg-3">{{commission.stage}}</div>
                 <div ng-show="isAuthorized" class="col-lg-1"><button ng-click="saveCommission(commission)">Save</button></div>
             </div>
         </div>
