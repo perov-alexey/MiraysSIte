@@ -11,19 +11,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="scripts/commission-page-module.js"></script>
+    <script src="scripts/commission-controller.js"></script>
+    <script src="scripts/components/commission/commission.js"></script>
 </head>
-<body ng-app="commissionPage">
-    <div ng-controller="commissionPageController" class="container-fluid view">
+<body ng-app="main">
+    <div ng-controller="commissionController" class="container-fluid view">
         <div class="col-lg-6 commissions">
             <div ng-repeat="commission in commissions" class="row commission">
-                <div class="col-lg-1 status_container">
-                    <div ng-class="commission.stage ? 'close_commission' : 'open_commission'" class="status"></div>
-                </div>
-                <div ng-hide="isAuthorized" class="col-lg-8 commission_owner">{{commission.owner}}</div>
-                <div ng-show="isAuthorized" class="col-lg-7 commission_owner"><input ng-model="commission.owner"></div>
-                <div class="col-lg-3">{{commission.stage}}</div>
-                <div ng-show="isAuthorized" class="col-lg-1"><button ng-click="saveCommission(commission)">Save</button></div>
+                <commission commission="commission" is-authorized="isAuthorized" on-update="updateCommissions()"></commission>
             </div>
         </div>
         <div class="col-lg-6">

@@ -1,0 +1,7 @@
+<div class="col-lg-1 status_container">
+    <div ng-class="$ctrl.commission.stage ? 'close_commission' : 'open_commission'" class="status"></div>
+</div>
+<div ng-hide="$ctrl.isAuthorized" class="col-lg-8 commission_owner">{{$ctrl.commission.owner}}</div>
+<div ng-show="$ctrl.isAuthorized" class="col-lg-7 commission_owner"><input ng-model="$ctrl.commission.owner"></div>
+<div class="col-lg-3">{{$ctrl.commission.stage}}</div>
+<div ng-show="$ctrl.isAuthorized" class="col-lg-1"><button ng-click="$ctrl.save($ctrl.commission)">Save</button></div>

@@ -1,9 +1,6 @@
 (function(angular) {
-    'use strict';
-    angular.module('commissionPage', ['ngRoute'])
-        .run(function($http) {
-            $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-        }).controller('commissionPageController', function($scope, $http) {
+    angular.module('main', ['ngRoute'])
+        .controller('commissionController', function($scope, $http) {
 
             $scope.checkAuthorization = function() {
                 $http.get("/user").then(function (response) {
@@ -27,14 +24,8 @@
                 window.location.href = "";
             };
 
-            $scope.saveCommission = function(commission) {
-                $http.post("/commission/add", commission).then(function(response) {
-                    $scope.updateCommissions();
-                });
-            };
-
             $scope.checkAuthorization();
-            $scope.updateCommissions()
+            $scope.updateCommissions();
 
     });
 })(window.angular);
