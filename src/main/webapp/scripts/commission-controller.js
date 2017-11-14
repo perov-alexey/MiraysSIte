@@ -1,5 +1,5 @@
 (function(angular) {
-    angular.module('main', ['ngRoute'])
+    angular.module('main', ['ngRoute', 'ngMaterial'])
         .controller('commissionController', function($scope, $http) {
 
             $scope.checkAuthorization = function() {

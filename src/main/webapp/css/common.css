@@ -1,7 +1,8 @@
 .status {
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
+    padding: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
     border: solid black thin;
 }
 
@@ -13,11 +14,31 @@
     background-color: red;
 }
 
-.status_container {
+.status-container {
     padding: 5px;
 }
 
 .commission {
-    border: solid black thin;
-    border-radius: 10px;
+    margin: 20px;
+}
+
+.commission-owner {
+    font-size: xx-large;
+}
+
+/** Commission Component Styles **/
+.stage-container {
+    height: 50px;
+    width: 50px;
+    background-color: aquamarine;
+    border-radius: 50%;
+}
+
+.data-row md-input-container {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.stage-row {
+    margin-top: 30px;
 }

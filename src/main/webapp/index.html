@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <title>Miray's Commissions!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link rel="stylesheet" href="css/common.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
     <script src="scripts/commission-controller.js"></script>
     <script src="scripts/components/commission/commission.js"></script>
 </head>
 <body ng-app="main">
-    <div ng-controller="commissionController" class="container-fluid view">
-        <div class="col-lg-6 commissions">
-            <div ng-repeat="commission in commissions" class="row commission">
+    <div ng-controller="commissionController" layout="row" class="view">
+        <div flex class="commissions">
+            <div ng-repeat="commission in commissions">
                 <commission commission="commission" is-authorized="isAuthorized" on-update="updateCommissions()"></commission>
+                <md-divider></md-divider>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div flex>
             <button ng-show="isAuthorized" ng-click="logout()">Logout</button>
         </div>
     </div>

@@ -4,10 +4,16 @@
         var ctrl = this;
 
         ctrl.save = function(commission) {
-            $http.post("/commission/add", commission).then(function(response) {
+            $http.post("/commission/add", commission).then(function() {
                 ctrl.onUpdate({});
             });
-        }
+        };
+
+        ctrl.saveIfEnterPressed = function(event, commission) {
+            if (event && event.key === "Enter") {
+                ctrl.save(commission);
+            }
+        };
     }
 
     angular.module('main').component('commission', {
