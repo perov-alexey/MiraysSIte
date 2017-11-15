@@ -32,7 +32,8 @@ public class SiteApplication {
             http.httpBasic()
             .and()
             .authorizeRequests()
-            .antMatchers("/", "/login", "/login.html", "/logout", "/scripts/**", "/commission/all", "/user").permitAll()
+            .antMatchers("/", "/login", "/login.html", "/logout", "/scripts/**", "/commission/all", "/user",
+                    "/files/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()
