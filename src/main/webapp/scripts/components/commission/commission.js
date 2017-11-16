@@ -3,6 +3,7 @@
     function CommissionController($http) {
         var ctrl = this;
 
+        //TODO Should I use the commission as parameter?
         ctrl.save = function(commission) {
             $http.post("/commission/add", commission).then(function() {
                 ctrl.onUpdate({});

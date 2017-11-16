@@ -11,18 +11,8 @@ public class Commission {
 
     //TODO In future use User here
     private String owner;
-
-    @Enumerated
-    @Column(nullable = false)
+    @OneToOne
     private Stage stage;
-
-    public Stage getStage() {
-        return stage;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
 
     public Integer getId() {
         return id;
@@ -38,5 +28,13 @@ public class Commission {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

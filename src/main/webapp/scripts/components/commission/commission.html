@@ -29,6 +29,10 @@
             <div flex>
                 <div class="stage-container">FINISHED</div>
             </div>
+            <input class="ng-hide" id="image-picker-$ctrl.commission.owner" type="file"
+                   data-bind-file="" data-ng-model="$ctrl.commission.stage.image"/>
+            <label for="image-picker-$ctrl.commission.owner" class="md-button md-raised md-primary">Choose File</label>
+            <md-button ng-click="$ctrl.save($ctrl.commission)">Save</md-button>
         </div>
     </div>
 </div>
