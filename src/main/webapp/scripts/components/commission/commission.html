@@ -2,7 +2,7 @@
     <div layout="row" class="data-row">
         <div layout="row" layout-align="start center" flex>
             <div class="status-container">
-                <div ng-class="$ctrl.commission.stage ? 'close_commission' : 'open_commission'" class="status"></div>
+                <div ng-class="$ctrl.commission.currentStage ? 'close_commission' : 'open_commission'" class="status"></div>
             </div>
             <div flex ng-hide="$ctrl.isAuthorized" class="commission-owner">{{$ctrl.commission.owner}}</div>
             <div flex ng-show="$ctrl.isAuthorized">
@@ -12,27 +12,39 @@
             </div>
         </div>
     </div>
-    <div layout="row" ng-show="$ctrl.commission.stage" class="stage-row">
+    <div layout="row" ng-show="$ctrl.commission.currentStage" class="currentStage-row">
         <div flex layout="row">
             <div flex>
-                <div class="stage-container">PAYED</div>
+                <div class="currentStage-container">PAYED</div>
             </div>
             <div flex>
-                <div class="stage-container">SKETCH</div>
+                <div class="currentStage-container">SKETCH</div>
             </div>
             <div flex>
-                <div class="stage-container">COLORED</div>
+                <div class="currentStage-container">COLORED</div>
             </div>
             <div flex>
-                <div class="stage-container">DETAILED</div>
+                <div class="currentStage-container">DETAILED</div>
             </div>
             <div flex>
-                <div class="stage-container">FINISHED</div>
+                <div class="currentStage-container">FINISHED</div>
             </div>
+            <md-input-container>
+                <label>Stage</label>
+                <md-select name="type" ng-model="$ctrl.commission.currentStage.stageName" required>
+                    <md-option value="SKETCH">Sketch</md-option>
+                    <md-option value="COLORED">Colored</md-option>
+                    <md-option value="DETAILED">Detailed</md-option>
+                    <md-option value="FINISHED">Finished</md-option>
+                </md-select>
+            </md-input-container>
             <input class="ng-hide" id="image-picker-$ctrl.commission.owner" type="file"
-                   data-bind-file="" data-ng-model="$ctrl.commission.stage.image"/>
+                   data-bind-file="" data-ng-model="$ctrl.commission.currentStage.image"/>
             <label for="image-picker-$ctrl.commission.owner" class="md-button md-raised md-primary">Choose File</label>
-            <md-button ng-click="$ctrl.save($ctrl.commission)">Save</md-button>
+            <md-button ng-click="$ctrl.updateStage()">Save</md-button>
+        </div>
+        <div ng-show="$ctrl.commission.currentStage" layout="row">
+            <img src="/files/image/{{$ctrl.commission.id}}/{{$ctrl.commission.currentStage.stageName}}">
         </div>
     </div>
 </div>

@@ -3,16 +3,35 @@
     function CommissionController($http) {
         var ctrl = this;
 
-        //TODO Should I use the commission as parameter?
-        ctrl.save = function(commission) {
-            $http.post("/commission/add", commission).then(function() {
-                ctrl.onUpdate({});
+        ctrl.updateStage = function() {
+            var formData = new FormData();
+            formData.append("owner", ctrl.commission.owner);
+            formData.append("commissionId", ctrl.commission.id);
+            formData.append("image", ctrl.commission.currentStage.image);
+            formData.append("stageName", ctrl.commission.currentStage.stageName);
+
+            $http({
+                method: 'POST',
+                url: '/commission/updateStage',
+                data: formData,
+                headers: {
+                    'Content-Type': undefined
+                }
             });
+        };
+
+        ctrl.add = function() {
+            $http.post("/commission/add", ctrl.commission);
         };
 
         ctrl.saveIfEnterPressed = function(event, commission) {
             if (event && event.key === "Enter") {
-                ctrl.save(commission);
+                if (ctrl.commission.id) {
+                    ctrl.save();
+                } else {
+                    ctrl.add();
+                }
+
             }
         };
     }
