@@ -21,13 +21,21 @@
         };
 
         ctrl.add = function() {
-            $http.post("/commission/add", ctrl.commission);
+            $http.post("/commission/add", ctrl.commission.owner).then(function() {
+                ctrl.onUpdate({});
+            });
+        };
+
+        ctrl.updateOwner = function() {
+            $http.post("/commission/updateOwner", ctrl.commission).then(function() {
+                ctrl.onUpdate({});
+            });
         };
 
         ctrl.saveIfEnterPressed = function(event, commission) {
             if (event && event.key === "Enter") {
                 if (ctrl.commission.id) {
-                    ctrl.save();
+                    ctrl.updateOwner();
                 } else {
                     ctrl.add();
                 }

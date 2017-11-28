@@ -42,3 +42,7 @@
 .stage-row {
     margin-top: 30px;
 }
+
+.current-stage {
+    border-bottom: solid;
+}
