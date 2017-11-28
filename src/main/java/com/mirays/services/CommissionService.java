@@ -44,6 +44,11 @@ public class CommissionService {
         return commissionRepository.save(commission);
     }
 
+    /**
+     * Create new commission
+     * @param owner Owner name
+     * @return New commission with set owner and initial stage
+     */
     public Commission createNewCommission(String owner) {
         Stage initialStage = stageService.getInitialStage();
 
@@ -52,7 +57,7 @@ public class CommissionService {
         commission.setCurrentStage(initialStage);
         commission.setStages(Arrays.asList(initialStage));
 
-        return new Commission();
+        return commission;
     }
 
     public Resource loadImageAsResource(Long commissionId, StageName stageName) {
