@@ -77,12 +77,8 @@ public class CommissionControllerTests {
     public void testNewCommissionAdding() throws Exception {
         String owner = UUID.randomUUID().toString();
 
-        Commission commission = new Commission();
-        commission.setOwner(owner);
-
         this.mockMvc.perform(post("/commission/add")
-                .content(this.mapper.writeValueAsString(commission))
-                .contentType(MediaType.APPLICATION_JSON)
+                .content(owner)
                 .with(user("user"))
         )
                 .andExpect(status().isOk());
@@ -91,14 +87,14 @@ public class CommissionControllerTests {
     }
 
     /**
-     * Then existing commission is modifying, should be called the commissionService.save
+     * Then existing commission is modifying, shouldn't be called the commissionService.createNewCommission
      */
     @Test
     public void testCommissionModification() throws Exception {
         Commission commission = new Commission();
         commission.setCurrentStage(new Stage());
 
-        this.mockMvc.perform(post("/commission/add")
+        this.mockMvc.perform(post("/commission/updateOwner")
                 .content(this.mapper.writeValueAsString(commission))
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(user("user"))

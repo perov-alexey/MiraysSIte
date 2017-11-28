@@ -27,14 +27,26 @@ public class CommissionController {
     private StageService stageService;
 
     /**
-     * Add new or modified existing commission. If there is no stage, this is new user, else existed.
-     * @param commission Commission which you want to add or modify.
+     * Add new commission.
+     * @param ownerName Name of the commission owner.
+     * @return OK status
      */
     @PostMapping("/add")
-    public void addCommission(@RequestBody Commission commission) {
-        //TODO It seems this controller break the single responsibility principle, I have to split this container on two controllers
-        if (commission.getCurrentStage() == null) commission = commissionService.createNewCommission(commission.getOwner());
+    public ResponseEntity addCommission(@RequestBody String ownerName) {
+        commissionService.save(commissionService.createNewCommission(ownerName));
+        //TODO Probably it would be good if I return different codes, for example if commission isn't saved.
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Update owner name
+     * @param commission Commission where owner name should be changed
+     * @return OK status
+     */
+    @PostMapping("/updateOwner")
+    public ResponseEntity updateCommissionOwner(@RequestBody Commission commission) {
         commissionService.save(commission);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping(value = "/updateStage")
