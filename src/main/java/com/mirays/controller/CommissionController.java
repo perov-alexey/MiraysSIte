@@ -7,11 +7,11 @@ import com.mirays.services.StageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -62,7 +62,8 @@ public class CommissionController {
     @GetMapping("/image/{commissionId:.+}/{stageName:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getStageImage(@PathVariable Long commissionId,
-                                              @PathVariable StageName stageName) {
+                                              @PathVariable StageName stageName) throws FileNotFoundException {
+        //TODO I have to appropriate handle FileNotFoundException
         Resource file = commissionService.loadImageAsResource(commissionId, stageName);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);

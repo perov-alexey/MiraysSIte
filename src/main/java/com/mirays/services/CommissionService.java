@@ -9,6 +9,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.ListIterator;
 import java.util.Optional;
@@ -60,9 +61,15 @@ public class CommissionService {
         return commission;
     }
 
-    public Resource loadImageAsResource(Long commissionId, StageName stageName) {
+    /**
+     * Loads image by commission ID and stage name as spring resource
+     * @param commissionId ID of commission
+     * @param stageName Name of the stage which we want to load image
+     * @return Stage image as resource
+     */
+    public Resource loadImageAsResource(Long commissionId, StageName stageName) throws FileNotFoundException {
         Commission commission = findOne(commissionId);
-        Stage stage = getStageByName(commission, stageName).get();
+        Stage stage = getStageByName(commission, stageName).orElseThrow(() -> new FileNotFoundException("Image not found"));
         return new ByteArrayResource(stage.getImage());
     }
 
