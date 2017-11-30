@@ -15,12 +15,16 @@ import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -127,6 +131,33 @@ public class CommissionServiceTest {
         assertThatThrownBy(() -> commissionService.loadImageAsResource(commissionId, requestedStageName))
                 .isInstanceOf(FileNotFoundException.class)
                 .hasMessage("Image not found");
+    }
+
+    /**
+     * Then commission updates with next stage, this stage should become current, also stages list should be updated
+     * with this stage.
+     */
+    @Test
+    public void testUpdatingCommissionWithNewStage() throws Exception {
+        Long commissionId = 1L;
+        StageName newStageName = StageName.SKETCH;
+        byte[] image = UUID.randomUUID().toString().getBytes();
+
+        Stage approvedStage = new Stage(StageName.APPROVED, new byte[0]);
+        Commission commission = new Commission();
+        commission.setId(commissionId);
+        commission.setCurrentStage(approvedStage);
+        commission.setStages(new ArrayList<>(Arrays.asList(approvedStage)));
+
+        when(commissionRepository.save(any(Commission.class))).thenAnswer(invocation -> invocation.getArguments()[0]);
+
+        Commission updatedCommission = commissionService.update(commission, new Stage(newStageName, image));
+
+        assertThat(updatedCommission.getCurrentStage().getStageName()).isEqualTo(newStageName);
+        assertThat(updatedCommission.getCurrentStage().getImage()).isEqualTo(image);
+        assertThat(updatedCommission.getStages().size()).isEqualTo(2);
+
+        verify(commissionRepository, times(1)).save(updatedCommission);
     }
 
 }

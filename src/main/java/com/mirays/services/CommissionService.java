@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.ListIterator;
 import java.util.Optional;
 
 @Service
@@ -34,14 +33,17 @@ public class CommissionService {
         return commissionRepository.findOne(id);
     }
 
+    /**
+     * This method saves updated commission with new stage. This method updates current stage with new stage and add it
+     * to the stage list of commission
+     * @param commission Updating commission
+     * @param newStage Stage which should be added to commission
+     * @return Updated commission
+     */
     public Commission update(Commission commission, Stage newStage) {
         commission.setCurrentStage(newStage);
-        ListIterator<Stage> stagesIterator = commission.getStages().listIterator();
-        while (stagesIterator.hasNext()) {
-            if (newStage.getStageName().equals(stagesIterator.next().getStageName())) {
-                stagesIterator.set(newStage);
-            }
-        }
+        commission.getStages().removeIf(stage -> stage.getStageName().equals(newStage.getStageName()));
+        commission.getStages().add(newStage);
         return commissionRepository.save(commission);
     }
 
