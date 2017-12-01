@@ -1,14 +1,17 @@
 (function(angular) {
 
-    function CommissionController($http) {
+    function CommissionController($scope, $http) {
         var ctrl = this;
 
-        ctrl.updateStage = function() {
+        ctrl.stages = ["PAYED", "SKETCH", "COLORED", "DETAILED", "FINISHED"];
+
+        $scope.updateStage = function(stageName) {
+
             var formData = new FormData();
             formData.append("owner", ctrl.commission.owner);
             formData.append("commissionId", ctrl.commission.id);
             formData.append("image", ctrl.commission.currentStage.image);
-            formData.append("stageName", ctrl.commission.currentStage.stageName);
+            formData.append("stageName", stageName);
 
             $http({
                 method: 'POST',
@@ -17,6 +20,8 @@
                 headers: {
                     'Content-Type': undefined
                 }
+            }).then(function() {
+                ctrl.onUpdate({});
             });
         };
 
