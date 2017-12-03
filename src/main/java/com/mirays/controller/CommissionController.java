@@ -49,6 +49,14 @@ public class CommissionController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Change stage of commission with uploaded image
+     * @param commissionId Updated commission
+     * @param stageName Stage name for creating stage
+     * @param image Image for creating stage
+     * @return  OK status
+     * @throws IOException In case of access issues
+     */
     @PostMapping(value = "/updateStage")
     public ResponseEntity changeStage(@RequestParam Long commissionId,
                                       @RequestParam StageName stageName,
